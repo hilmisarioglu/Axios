@@ -1,9 +1,10 @@
 // $= query selector e benziyor
-$(document).ready(function() {
-    setTimeout(fillFormInput,[]) 
-})
+// $(document).ready(function() {
+//     setTimeout(fillFormInput,1000) 
+// })
 // window.onload = function () {
-        // setTimeout(fillFormInput,1000)}
+//     setTimeout(fillFormInput,1000)
+// }
 
 const fillFormInput = ()=> {
     let email = document.getElementById("email").value="eve.holt@reqres.in";
@@ -11,6 +12,8 @@ const fillFormInput = ()=> {
     localStorage.setItem("email",email); // setItem ile local storage a attik
     localStorage.setItem("password",password); // setItem ile local storage a attik
 }
+fillFormInput();
+
 // -------------------------------------
 
 // eski yöntem XMLHTTPREQUEST old method of fetch and axios 
@@ -50,7 +53,8 @@ const fillFormInput = ()=> {
 // ----------------------------------------------------------------
 
 // fetch ile veri cekme
-const  apiRegister = async() => {
+
+const  apiRegister = () => {
 
     let email = document.getElementById("email");
     let password = document.getElementById("psw");
@@ -59,25 +63,49 @@ const  apiRegister = async() => {
         password : password.value
     };
   
-    await fetch("https://reqres.in/api/register",{
+    fetch("https://reqres.in/api/register",{
         method:"POST",
         headers:{
             "Content-Type": "application/json"}, // veri gönderme tipini belirledik. Gidecek veri json formatinda.Bu hep headers kisminda yapilir
-        body : JSON.stringify(bodyData) // Burada yukarida olusturdugumuz bodyData yi yani JS i JSON a cevirdi
+        body : JSON.stringify(bodyData) // Burada yukarida olusturdugumuz bodyData yi yani JS i JSON a cevirdi gönderdi
         })
-        .then(response => response.json()) // parse yarine bu kullanilir, JSON i JS e cevirir.
+        .then(response => (response.json())) // parse yarine bu kullanilir, JSON i JS e cevirir.
         .then(data=>{
             if(data.id !=0){
                 console.log(data)
                 localStorage.setItem("token",data.token);
+                sessionStorage.setItem("token",data.token); // sekme kapaninca gider
             }
         })
         .catch((err)=>{
             console.log(err)
         })
+        email.value ="";
+        password.value = "";
 
-    email.value="";
-    password.value="";
-    
     }
-    // Birden fazla promise yapisi döndürmek zorunda kalirsak async await kelimelerini yaz
+//     // Birden fazla promise yapisi döndürmek zorunda kalirsak async await kelimelerini yaz. Gelen veriyi html icine gömmeye calisacam diyelim. Bu sebeple api islemlerinde asyncron yapilar kullanilir. await, bi bekle diyor yani ben bi geleyim bekle diyor.
+
+// ----------------------------------------------------------------
+
+// axios
+
+// const apiRegister = async function () {
+//     email="";
+//     password="";
+//     let email = document.getElementById("email").value;
+//     let password = document.getElementById("password").value;
+//     const data = await axios({
+//         url : 'https://reqres.in/api/register',  
+//         method: 'post',
+//         data: {
+//             email : email,
+//             password : password  //biz bu sekilde gönderecegiz, o istedigimiz JS formatinda bize geri döndürecek. Cevirmekle ugrasmicaz.
+//         }
+//     });
+
+//     if(data.data.id != "0"){
+//         console.log(data)
+//     }
+// }
+// Not; axios ta bodyData tanimlamaya gerek yoktur. Ekstradan nesne göndermeme gerek kalmiyor. Ne stringfy yaptik ne de parse yaptik.
