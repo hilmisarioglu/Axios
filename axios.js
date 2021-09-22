@@ -50,7 +50,7 @@ const fillFormInput = ()=> {
 // ----------------------------------------------------------------
 
 // fetch ile veri cekme
-const apiRegister = () => {
+const  apiRegister = async() => {
 
     let email = document.getElementById("email");
     let password = document.getElementById("psw");
@@ -59,7 +59,7 @@ const apiRegister = () => {
         password : password.value
     };
   
-    fetch("https://reqres.in/api/register",{
+    await fetch("https://reqres.in/api/register",{
         method:"POST",
         headers:{
             "Content-Type": "application/json"}, // veri gönderme tipini belirledik. Gidecek veri json formatinda.Bu hep headers kisminda yapilir
@@ -69,9 +69,15 @@ const apiRegister = () => {
         .then(data=>{
             if(data.id !=0){
                 console.log(data)
+                localStorage.setItem("token",data.token);
             }
         })
         .catch((err)=>{
             console.log(err)
         })
+
+    email.value="";
+    password.value="";
+    
     }
+    // Birden fazla promise yapisi döndürmek zorunda kalirsak async await kelimelerini yaz
