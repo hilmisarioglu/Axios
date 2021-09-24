@@ -62,6 +62,7 @@ registerbtn.addEventListener("click", (e)=>{
 // ----------------------------------------------------------------
 
 // fetch ile veri cekme
+<<<<<<< HEAD
 
 // async function apiRegister() {
 //   let email = document.getElementById("email");
@@ -136,3 +137,36 @@ const apiRegister = async ()=> {
 
 
 
+=======
+const  apiRegister = async() => {
+
+    let email = document.getElementById("email");
+    let password = document.getElementById("psw");
+    const bodyData = {
+        email : email.value,
+        password : password.value
+    };
+  
+    await fetch("https://reqres.in/api/register",{
+        method:"POST",
+        headers:{
+            "Content-Type": "application/json"}, // veri gönderme tipini belirledik. Gidecek veri json formatinda.Bu hep headers kisminda yapilir
+        body : JSON.stringify(bodyData) // Burada yukarida olusturdugumuz bodyData yi yani JS i JSON a cevirdi
+        })
+        .then(response => response.json()) // parse yarine bu kullanilir, JSON i JS e cevirir.
+        .then(data=>{
+            if(data.id !=0){
+                console.log(data)
+                localStorage.setItem("token",data.token);
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+
+    email.value="";
+    password.value="";
+    
+    }
+    // Birden fazla promise yapisi döndürmek zorunda kalirsak async await kelimelerini yaz
+>>>>>>> d60f63c61a9656a85f083fc0906543010382df96
