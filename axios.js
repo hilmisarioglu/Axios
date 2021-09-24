@@ -4,9 +4,8 @@
 // $(document).ready(function() {
 //     setTimeout(fillFormInput,1000)
 // })
-window.onload = function (e) {
+window.onload = function () {
     setTimeout(fillFormInput,1000)
-
 }
 
 const fillFormInput = () => {
@@ -121,53 +120,19 @@ const apiRegister = async ()=> {
             password : password  //biz bu sekilde gönderecegiz, o istedigimiz JS formatinda bize geri döndürecek. Cevirmekle ugrasmicaz.
         }
     });
-
-    if(data.data.id= "0"){
+    if(data.data.id != "0" ){
         console.log(data.data.token);
-        window.location.href = "userList.html"
+        window.location.href = "./userList.html" //userList i actik
     }
 }
+
 // Not; axios ta bodyData tanimlamaya gerek yoktur. Ekstradan nesne göndermeme gerek kalmiyor. Ne stringfy yaptik ne de parse yaptik.
 
 // ----------------------------------------------------------------
 
 // userList sayfasina yönlendirdikten sonra GET methoduyla listeyi dolduracaz
 
-const apiRegister = async() => {
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('psw').value;
 
-    await fetch ("https://reqres.in/api/users?page=2", {
-        method:"GET",
-    })
-    .then(response => response.json())
-    .then(response =>{
-        if(response.data[0].id !="0"){
-                for (let index = 0; index < response.data.length; index++) {
-                    $("#todyUserList").append(
-                        `
-                        <tr>
-                            <td>
-                            <img src="${response.data[i].avatar}"/>
-                            </td>
-                            <td>
-                            ${response.data[i].id}
-                            </td>
-                            <td>
-                            ${response.data[i].email}
-                            </td>
-                            <td>
-                            ${response.data[i].first_name}
-                            </td>
-                            <td>
-                            ${response.data[i].last_name}
-                            </td>
-                        </tr>   
-                       
-                        `
-                    )
-                }
-        }
-    })
-    .catch((error) => console.log(error))
-}
+
+
+

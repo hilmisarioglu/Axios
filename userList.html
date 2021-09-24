@@ -6,13 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="userList.css">
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
 </head>
 <body>
     <h1>User List</h1>
     <div class="container" id="MainDiv"> 
-        <table>
-            <thead>
-                <tr>
+        <table class="table">
+            <thead class="thead">
+                <tr class="tr">
                     <th>Avatar</th>
                     <th>Id</th>
                     <th>Email</th>
@@ -24,11 +26,12 @@
                     
             </tbody>
         </table>
-        <div id="loading" style="display: none">
+        <!-- <div id="loading" style="display: none">
                 <center>
                     <img src="img/loading.gif" alt="">
                 </center>
-        </div>
+        </div> -->
     </div>
+    <script src="userList.js"></script>
 </body>
 </html>
